@@ -196,14 +196,20 @@ export const KPIS: { label: string; value: string; delta: string; positive: bool
   { label: "Economies Compared", value: "5", delta: "benchmarked", positive: true },
 ];
 
-// A real SQL snippet shown in the analytics showcase (purely illustrative).
-export const SQL_SAMPLE = `-- Churn rate & revenue at risk by contract type
-SELECT
-    contract_type,
-    COUNT(*)                                   AS customers,
-    SUM(churned)                               AS churned,
-    ROUND(100.0 * SUM(churned) / COUNT(*), 2)  AS churn_rate_pct,
-    SUM(CASE WHEN churned = 1 THEN monthly_charges END) AS revenue_at_risk
-FROM customers
-GROUP BY contract_type
-ORDER BY churn_rate_pct DESC;`;
+// DAX measures from the Power BI churn project (illustrative).
+export const DAX_SAMPLE = `// Churn Rate % — share of customers who left
+Churn Rate % =
+DIVIDE(
+    CALCULATE(
+        COUNTROWS( Customers ),
+        Customers[Churn] = "Yes"
+    ),
+    COUNTROWS( Customers )
+)
+
+// Revenue at Risk — monthly revenue from churned customers
+Revenue at Risk =
+CALCULATE(
+    SUMX( Customers, Customers[MonthlyCharges] ),
+    Customers[Churn] = "Yes"
+)`;

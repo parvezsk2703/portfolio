@@ -1,9 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Terminal } from "lucide-react";
-import { KPIS, SQL_SAMPLE } from "@/lib/data";
+import { ArrowDownRight, ArrowUpRight, FileCode2 } from "lucide-react";
+import { KPIS, DAX_SAMPLE } from "@/lib/data";
 import SectionHeading from "@/components/ui/SectionHeading";
+
+// Illustrative churn rate by contract type (Power BI churn project).
+const BARS = [
+  { label: "Month-to-month", v: 88, color: "from-rose-500 to-rose-400" },
+  { label: "One year", v: 42, color: "from-amber-500 to-amber-400" },
+  { label: "Two year", v: 18, color: "from-emerald-500 to-emerald-400" },
+];
 
 export default function AnalyticsShowcase() {
   return (
@@ -11,7 +18,7 @@ export default function AnalyticsShowcase() {
       <SectionHeading
         eyebrow="07 — In Action"
         title="Analytics Showcase"
-        subtitle="A glimpse of the metrics I surface and the queries behind them."
+        subtitle="A glimpse of the metrics I surface and the logic behind them."
       />
 
       {/* KPI cards */}
@@ -44,7 +51,7 @@ export default function AnalyticsShowcase() {
         ))}
       </div>
 
-      {/* SQL sample + mini bar chart */}
+      {/* DAX sample + mini bar chart */}
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -53,11 +60,11 @@ export default function AnalyticsShowcase() {
           className="glass overflow-hidden"
         >
           <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
-            <Terminal className="h-4 w-4 text-accent-cyan" />
-            <span className="font-mono text-xs text-slate-400">churn_analysis.sql</span>
+            <FileCode2 className="h-4 w-4 text-accent-cyan" />
+            <span className="font-mono text-xs text-slate-400">churn_measures.dax</span>
           </div>
           <pre className="overflow-x-auto p-4 font-mono text-[12px] leading-relaxed text-slate-300">
-            <code>{SQL_SAMPLE}</code>
+            <code>{DAX_SAMPLE}</code>
           </pre>
         </motion.div>
 
@@ -71,25 +78,33 @@ export default function AnalyticsShowcase() {
             Churn Rate by Contract Type{" "}
             <span className="text-slate-500">(illustrative)</span>
           </p>
-          <div className="flex flex-1 items-end justify-around gap-4">
-            {[
-              { label: "Month-to-month", v: 88, color: "from-rose-500 to-rose-400" },
-              { label: "One year", v: 42, color: "from-amber-500 to-amber-400" },
-              { label: "Two year", v: 18, color: "from-emerald-500 to-emerald-400" },
-            ].map((bar) => (
-              <div key={bar.label} className="flex w-full flex-col items-center gap-2">
+          {/* Fixed-height plot area so the percentage bar heights resolve correctly. */}
+          <div className="flex h-52 items-end justify-around gap-4">
+            {BARS.map((bar) => (
+              <div
+                key={bar.label}
+                className="flex h-full w-full max-w-[72px] flex-col items-center justify-end"
+              >
+                <span className="mb-2 text-xs font-semibold text-white">{bar.v}%</span>
                 <motion.div
                   initial={{ height: 0 }}
                   whileInView={{ height: `${bar.v}%` }}
                   viewport={{ once: true }}
                   transition={{ duration: 1, ease: "easeOut" }}
-                  className={`w-full max-w-[60px] rounded-t-lg bg-gradient-to-t ${bar.color}`}
-                  style={{ minHeight: 8 }}
+                  className={`w-full rounded-t-lg bg-gradient-to-t ${bar.color}`}
                 />
-                <span className="text-center text-[10px] leading-tight text-slate-400">
-                  {bar.label}
-                </span>
               </div>
+            ))}
+          </div>
+          {/* x-axis labels */}
+          <div className="mt-3 flex justify-around gap-4">
+            {BARS.map((bar) => (
+              <span
+                key={bar.label}
+                className="w-full max-w-[72px] text-center text-[10px] leading-tight text-slate-400"
+              >
+                {bar.label}
+              </span>
             ))}
           </div>
         </motion.div>
