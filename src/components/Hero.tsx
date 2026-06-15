@@ -112,7 +112,7 @@ export default function Hero() {
           {STATS.map((s) => (
             <div key={s.label} className="glass px-4 py-4 text-center">
               <div className="text-2xl font-bold text-white">
-                <Counter to={s.value} suffix={s.suffix} />
+                <Counter to={s.value} suffix={s.suffix} prefix={s.prefix} />
               </div>
               <div className="mt-1 text-[11px] uppercase tracking-wide text-slate-400">
                 {s.label}

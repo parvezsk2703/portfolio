@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
-type Props = { to: number; suffix?: string; duration?: number };
+type Props = { to: number; suffix?: string; prefix?: string; duration?: number };
 
 /** Counts from 0 → `to` when scrolled into view. Used for headline stats. */
-export default function Counter({ to, suffix = "", duration = 1500 }: Props) {
+export default function Counter({ to, suffix = "", prefix = "", duration = 1500 }: Props) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [value, setValue] = useState(0);
@@ -28,6 +28,7 @@ export default function Counter({ to, suffix = "", duration = 1500 }: Props) {
 
   return (
     <span ref={ref}>
+      {prefix}
       {value.toLocaleString()}
       {suffix}
     </span>

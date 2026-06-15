@@ -46,10 +46,10 @@ export const PROFILE = {
 };
 
 /* --------------------------- HEADLINE STAT COUNTERS -------------------------- */
-export const STATS: { label: string; value: number; suffix: string }[] = [
+export const STATS: { label: string; value: number; suffix: string; prefix?: string }[] = [
   { label: "Records Analyzed", value: 7000, suffix: "+" },
   { label: "SQL Queries Written", value: 20, suffix: "+" },
-  { label: "Dashboards Built", value: 2, suffix: "" },
+  { label: "Revenue Impact Identified", value: 139, suffix: "K", prefix: "₹" },
   { label: "Hackathon Rank", value: 8, suffix: "th" },
 ];
 
@@ -163,7 +163,7 @@ export const EXPERIENCE: Experience[] = [
     role: "Data Analyst Intern",
     company: "UnlockDiscounts",
     location: "Remote",
-    period: "Mar 2026 – Jul 2026",
+    period: "Mar 2026 – May 2026 · 3 mos",
     points: [
       "Analyzed business and customer datasets using Excel (Pivot Tables) and Power BI to identify trends, track KPIs, and support data-driven decision-making.",
       "Performed data cleaning, transformation, and validation to improve data quality and ensure accurate reporting.",
