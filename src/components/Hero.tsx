@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download, Mail, Github, Linkedin, ArrowDown, MapPin } from "lucide-react";
 import { PROFILE, STATS } from "@/lib/data";
@@ -31,12 +32,13 @@ export default function Hero() {
         </ErrorBoundary>
       </div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-        className="mx-auto w-full max-w-6xl px-5 sm:px-8"
-      >
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-5 sm:px-8 lg:grid-cols-[1.25fr_0.9fr]">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          className="order-2 lg:order-1"
+        >
         <motion.span
           variants={item}
           className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300 backdrop-blur"
@@ -118,7 +120,34 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
-      </motion.div>
+        </motion.div>
+
+        {/* Profile photo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+          className="order-1 flex justify-center lg:order-2"
+        >
+          <div className="relative animate-float">
+            {/* soft glow behind the photo */}
+            <div className="absolute -inset-5 rounded-full bg-gradient-to-tr from-accent-cyan/30 via-accent-blue/20 to-accent-violet/30 blur-2xl" />
+            {/* gradient ring frame */}
+            <div className="relative rounded-full bg-gradient-to-tr from-accent-cyan via-accent-blue to-accent-violet p-[3px]">
+              <div className="relative h-56 w-56 overflow-hidden rounded-full border-2 border-base-900 sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+                <Image
+                  src={PROFILE.photo}
+                  alt={`${PROFILE.name} — ${PROFILE.title}`}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 18rem, 20rem"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
 
       <motion.a
         href="#about"

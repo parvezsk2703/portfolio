@@ -39,6 +39,7 @@ export const PROFILE = {
   linkedin: "https://www.linkedin.com/in/parvezshaik2703/",
   github: "https://github.com/parvezsk2703",
   resume: "/Shaik_Parvez_Resume.pdf",
+  photo: "/profile.png",
   // Career goal shown in the About section.
   goal:
     "Seeking a Data Analyst internship or entry-level role where I can apply my analytics, dashboarding, and problem-solving skills to drive measurable business impact while growing into an end-to-end analytics professional.",
