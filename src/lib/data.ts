@@ -163,7 +163,7 @@ export const EXPERIENCE: Experience[] = [
     role: "Data Analyst Intern",
     company: "UnlockDiscounts",
     location: "Remote",
-    period: "Mar 2026 – May 2026 · 3 mos",
+    period: "Mar 2026 – Jun 2026 · 3 mos",
     points: [
       "Analyzed business and customer datasets using Excel (Pivot Tables) and Power BI to identify trends, track KPIs, and support data-driven decision-making.",
       "Performed data cleaning, transformation, and validation to improve data quality and ensure accurate reporting.",
