@@ -20,7 +20,7 @@ import {
 /* ----------------------------------- META ----------------------------------- */
 export const SITE = {
   // TODO: replace with your real deployed URL after you go live (used for SEO).
-  url: "https://parvezsk2703.vercel.app",
+  url: "https://portfolio-pi-wine-90.vercel.app",
   ogImage: "/og.png", // optional — add public/og.png later for rich link previews
 };
 
