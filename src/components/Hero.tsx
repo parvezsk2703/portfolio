@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Download, Mail, Github, Linkedin, ArrowDown, MapPin } from "lucide-react";
 import { PROFILE, STATS } from "@/lib/data";
 import Counter from "@/components/ui/Counter";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 // 3D canvas is client-only and heavy → load it lazily, never on the server.
 const Scene3D = dynamic(() => import("@/components/Scene3D"), { ssr: false });
@@ -24,7 +25,10 @@ export default function Hero() {
       {/* faint grid + 3D background */}
       <div className="absolute inset-0 -z-10 bg-grid-faint [background-size:44px_44px] opacity-60" />
       <div className="absolute inset-0 -z-10">
-        <Scene3D />
+        {/* If WebGL ever fails, the gradient + grid above remain — no white screen. */}
+        <ErrorBoundary fallback={null}>
+          <Scene3D />
+        </ErrorBoundary>
       </div>
 
       <motion.div
